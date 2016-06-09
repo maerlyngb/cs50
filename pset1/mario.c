@@ -8,39 +8,54 @@
 #include <stdio.h>
 #include <cs50.h>
 
-void print_pyramid(int height){
-    
+
+void print_pyramid(int height, char block, char pad);
+int get_height();
+
+
+int main(void){
+
+    int min_height = 0;
+    int max_height = 23;
+
+    int height = get_height(min_height, max_height);
+
     char block = '#';
     char pad = ' ';
-    
+
+    print_pyramid(height, block, pad);
+}
+
+
+int get_height(int min_height, int max_height){
+
+    int height;
+
+    do {
+        printf("Height? ");
+        height = GetInt();
+    } while ((height < min_height) || (height > max_height));
+
+    return height;
+}
+
+
+void print_pyramid(int height, char block, char pad){
+
     for(int i = 0; i < height; i++){
 
         int blocks = i + 1;
-        int pad_len = height - blocks;
-        
-        for(int j = 0; j < pad_len; j++){
+        int padding = height - blocks;
+
+        for(int j = 0; j < padding; j++){
             printf("%c", pad);
         }
-        
+
         for(int k = 0; k < blocks; k++){
             printf("%c", block);
         }
-        
-        printf("#\n");
-    }
-}
 
-int main(void){
-    int height;
-    
-    do {
-        printf("How tall do you want your pyramid? (>0 && <24) ");
-        height = GetInt();
-    } while ((height < 0) || (height > 23));
-
-    if(height > 0){
-        print_pyramid(height);
+        // print an extra block before new line
+        printf("%c\n", block);
     }
-    
-    return 0;
 }
