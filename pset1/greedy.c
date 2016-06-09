@@ -60,7 +60,7 @@ int greedy(int pool, int slices[], int slice_id, int total_slices){
         int current_slices = floor(pool / slice);
         
         // take away slices and update the pool
-        pool = pool - (slice * current_slices);
+        pool -= (slice * current_slices);
         
         // add number of taken away slices to running total
         total_slices += current_slices;
